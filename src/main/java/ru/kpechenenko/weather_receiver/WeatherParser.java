@@ -19,8 +19,7 @@ final class WeatherParser {
     }
 
     WeatherParser(String locationName) {
-        validateLocationName(locationName);
-        this.locationNameForQuery = locationName;
+        this(locationName, CONNECTION_TIMEOUT_DEFAULT_VALUE);
     }
 
     static WeatherParser createWeatherParserForHometown() {
@@ -48,7 +47,7 @@ final class WeatherParser {
     }
 
     String getLocationName() {
-        return locationNameForQuery;
+        return this.locationName;
     }
 
     private void validateLocationName(String locationName) {
@@ -76,8 +75,8 @@ final class WeatherParser {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Content-Type", "application/json");
-        connection.setConnectTimeout(CONNECTION_TIMEOUT);
-        connection.setReadTimeout(CONNECTION_TIMEOUT);
+        connection.setConnectTimeout(this.connectionTimeout);
+        connection.setReadTimeout(this.connectionTimeout);
         if (connection.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) {
             throw new IllegalArgumentException(
                 String.format("Weather forecast for %s not found.", this.locationName)
