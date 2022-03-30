@@ -48,15 +48,11 @@ final class WeatherParser {
     }
 
     String createUrlForOpenWeatherServiceAndCurrentLocation() {
-        return OPEN_WEATHER_URL +
-            "?" +
-            "units=metric" +
-            "&" +
-            "q=" +
-            locationNameForQuery +
-            "&" +
-            "appid=" +
-            WeatherParser.getSecretApiKeyForOpenWeatherService();
+        return String.format("%s?units=metric&q=%s&appid=%s",
+            WeatherParser.OPEN_WEATHER_URL,
+            this.locationName,
+            WeatherParser.getSecretApiKeyForOpenWeatherService()
+        );
     }
 
     String getCurrentWeatherAsJsonString() throws IOException {
@@ -67,7 +63,9 @@ final class WeatherParser {
         connection.setConnectTimeout(CONNECTION_TIMEOUT);
         connection.setReadTimeout(CONNECTION_TIMEOUT);
         if (connection.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) {
-            throw new IllegalArgumentException("Weather forecast for " + locationNameForQuery + " not found.");
+            throw new IllegalArgumentException(
+                String.format("Weather forecast for %s not found.", this.locationName)
+            );
         }
         if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
             throw new IllegalStateException("Error creating HTTP connection.");
