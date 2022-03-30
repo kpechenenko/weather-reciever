@@ -9,7 +9,7 @@ public class Client {
 	public static void main(String[] args) {
 		try {
 			WeatherReport weatherReport = new ObjectMapper().readValue(
-				WeatherParser.createWeatherParserForHometown().getCurrentWeatherAsJsonString(),
+				new WeatherParser("barnaul").getCurrentWeatherAsJsonString(),
 				WeatherReport.class
 			);
 			weatherReport.printReportToStandardOutput();
