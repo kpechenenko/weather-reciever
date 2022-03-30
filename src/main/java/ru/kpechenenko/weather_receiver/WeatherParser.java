@@ -7,9 +7,16 @@ import java.util.Properties;
 
 final class WeatherParser {
     private final static String OPEN_WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather";
-    private static final int CONNECTION_TIMEOUT = 1000;
-    private final static String kostyasHometownName = "barnaul";
-    private final String locationNameForQuery;
+    private final static int CONNECTION_TIMEOUT_DEFAULT_VALUE = 1000;
+    private final int connectionTimeout;
+    private final String locationName;
+
+    WeatherParser(String locationName, int connectionTimeout) {
+        this.validateLocationName(locationName);
+        this.locationName = locationName;
+        this.getValidateConnectionTimeout(connectionTimeout);
+        this.connectionTimeout = connectionTimeout;
+    }
 
     WeatherParser(String locationName) {
         validateLocationName(locationName);
