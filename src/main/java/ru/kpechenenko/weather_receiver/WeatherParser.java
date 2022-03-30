@@ -21,7 +21,7 @@ final class WeatherParser {
     }
 
     private static String getSecretApiKeyForOpenWeatherService() {
-        String absPathToPropertiesFile = "/home/kostya/from-scratch/custom-weather-receiver/src/main/resources/config.properties";
+        String absPathToPropertiesFile = "src/main/resources/config.properties";
         try (InputStream inputPropertyStream = new FileInputStream(absPathToPropertiesFile)) {
             Properties property = new Properties();
             property.load(inputPropertyStream);
