@@ -31,6 +31,15 @@ final class WeatherParser {
         }
     }
 
+    private void getValidateConnectionTimeout(int connectionTimeout) {
+        if (connectionTimeout <= 0) {
+            throw new IllegalArgumentException("Connection time out must be positive.");
+        }
+        if (connectionTimeout >= 5000) {
+            throw new IllegalArgumentException("Connection time out must be less than 5000 ms.");
+        }
+    }
+
     String getLocationName() {
         return locationNameForQuery;
     }
