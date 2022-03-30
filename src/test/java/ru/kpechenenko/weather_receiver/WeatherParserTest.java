@@ -12,7 +12,7 @@ class WeatherParserTest {
 
 	@BeforeEach
 	void initHomeParser() {
-		parserForHomeLocation = WeatherParser.createWeatherParserForHometown();
+		parserForHomeLocation = new WeatherParser("barnaul");
 	}
 
 	@Test
