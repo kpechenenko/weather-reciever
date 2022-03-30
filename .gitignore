@@ -7,6 +7,9 @@
 # Own helper file
 helper.txt
 
+# Old img
+user_case_for_readme.png
+
 # Maven
 out/
 log/
