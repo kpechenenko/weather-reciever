@@ -4,9 +4,6 @@
 *.iml
 *.ipr
 
-# Properies files
-*.properties
-
 # Own helper file
 helper.txt
 
