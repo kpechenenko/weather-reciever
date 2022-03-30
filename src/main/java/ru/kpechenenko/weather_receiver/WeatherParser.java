@@ -22,9 +22,6 @@ final class WeatherParser {
         this(locationName, CONNECTION_TIMEOUT_DEFAULT_VALUE);
     }
 
-    static WeatherParser createWeatherParserForHometown() {
-        return new WeatherParser(kostyasHometownName);
-    }
 
     private static String getSecretApiKeyForOpenWeatherService() {
         String absPathToPropertiesFile = "src/main/resources/config.properties";
