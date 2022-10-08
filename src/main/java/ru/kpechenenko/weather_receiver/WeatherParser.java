@@ -3,11 +3,15 @@ package ru.kpechenenko.weather_receiver;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 final class WeatherParser {
     private final static String OPEN_WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather";
     private final static int CONNECTION_TIMEOUT_DEFAULT_VALUE = 1000;
+    private final static String PATH_TO_PROPERTIES_FILE = "src/main/resources/config.properties";
+
     private final int connectionTimeout;
     private final String locationName;
 
@@ -24,8 +28,7 @@ final class WeatherParser {
 
 
     private static String getSecretApiKeyForOpenWeatherService() {
-        String absPathToPropertiesFile = "src/main/resources/config.properties";
-        try (InputStream inputPropertyStream = new FileInputStream(absPathToPropertiesFile)) {
+        try (InputStream inputPropertyStream = Files.newInputStream(Paths.get(PATH_TO_PROPERTIES_FILE))) {
             Properties property = new Properties();
             property.load(inputPropertyStream);
             return property.getProperty("openweather.apikey");
