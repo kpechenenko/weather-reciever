@@ -1,4 +1,4 @@
-custom-weather-receiver
+weather-receiver
 ===
 
 General info
