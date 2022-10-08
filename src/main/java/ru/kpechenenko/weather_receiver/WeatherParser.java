@@ -26,6 +26,19 @@ final class WeatherParser {
         this(locationName, CONNECTION_TIMEOUT_DEFAULT_VALUE);
     }
 
+    WeatherParser() {
+        this(getDefaultLocationName(), CONNECTION_TIMEOUT_DEFAULT_VALUE);
+    }
+
+    private static String getDefaultLocationName() {
+        try (InputStream inputPropertyStream = Files.newInputStream(Paths.get(PATH_TO_PROPERTIES_FILE))) {
+            Properties property = new Properties();
+            property.load(inputPropertyStream);
+            return property.getProperty("location.name");
+        } catch (IOException e) {
+            throw new IllegalStateException("Error: location name not found.", e);
+        }
+    }
 
     private static String getSecretApiKeyForOpenWeatherService() {
         try (InputStream inputPropertyStream = Files.newInputStream(Paths.get(PATH_TO_PROPERTIES_FILE))) {
